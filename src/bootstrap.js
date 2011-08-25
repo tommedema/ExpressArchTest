@@ -1,5 +1,5 @@
 /*
-    ShareDiscover1 bootstrap
+    Bootstrap
     
     The bootstrap is responsible for:
         > setting up our mediator (global event broker)
