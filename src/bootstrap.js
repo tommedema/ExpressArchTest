@@ -17,7 +17,7 @@ runRoutines(__dirname + '/routines', function(err, routines) {
     /* late-boot (for late boot routines once all routines have been loaded, before ready) */
     mediator.emit('boot.lateboot');
     
-    /* ready (for normal routines, after post-boot) */
+    /* ready (for normal routines, after late-boot) */
     mediator.emit('boot.ready');
 });
 
