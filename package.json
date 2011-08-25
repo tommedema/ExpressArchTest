@@ -1,7 +1,7 @@
 {
     "name": "ExpressArchTest",
     "description": "Just an example.",
-    "version": "v0.0.1-1",
+    "version": "0.0.1-1",
     "author": "Tom Medema <tommedema@gmail.com>",
     "contributors": [ 
         { "name": "Tom Medema", "email": "tommedema@gmail.com" }
@@ -11,7 +11,7 @@
       , "jade": "0.14.2"
       , "socket.io": "0.7.9"
       , "optimist": "0.2.6"
-      , "mediator": "v0.0.1"
+      , "mediator": "0.0.1"
     },
     "main": "src/main",
     "engines": { 
