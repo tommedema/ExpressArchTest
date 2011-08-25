@@ -1,0 +1,20 @@
+{
+    "name": "ExpressArchTest",
+    "description": "Just an example.",
+    "version": "v0.0.1-1",
+    "author": "Tom Medema <tommedema@gmail.com>",
+    "contributors": [ 
+        { "name": "Tom Medema", "email": "tommedema@gmail.com" }
+    ],
+    "dependencies": {
+        "express": "2.4.6"
+      , "jade": "0.14.2"
+      , "socket.io": "0.7.9"
+      , "optimist": "0.2.6"
+      , "mediator": "v0.0.1"
+    },
+    "main": "src/main",
+    "engines": { 
+        "node": ">= 0.4.10 < 0.5.0"
+    }
+}

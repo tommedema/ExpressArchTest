@@ -1,0 +1,15 @@
+!!!
+html
+
+    head
+        title= title || 'Title not set.'
+        
+        link(href='/favicon.ico', rel='icon', type='image/x-icon')
+    
+    body
+        #header
+            h1 Application Title
+        
+        #content!= body //- this renders the body of an individual view
+        
+        #footer
