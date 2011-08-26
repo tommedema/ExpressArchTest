@@ -11,7 +11,7 @@ mediator.on('server.routers.ready', function() {
     mediator.emit('server.request.server', function(server) {
         
         /* get port */
-        mediator.emit('settings.getPort', function(port) {
+        mediator.emit('settings.request.port', function(port) {
             
             /* pre-run */
             mediator.emit('server.prerun', server, port);

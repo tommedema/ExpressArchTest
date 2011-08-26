@@ -6,7 +6,7 @@ mediator.once('boot.init', function() {
     var settings = new Settings(settingsFile).getEnvironment();
     
     /* answer port request */
-    mediator.on('settings.getPort', function(cb) {
+    mediator.on('settings.request.port', function(cb) {
         cb(settings.server.port);
     });
 });
