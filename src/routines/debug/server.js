@@ -27,10 +27,10 @@ mediator.on('server.configured', function() {
     mediator.emit('debug', 'http server has now been configurated');
 });
 
-mediator.on('server.configDevelopment', function() {
+mediator.on('server.config.development', function() {
     mediator.emit('debug', 'http server configured for development');
 });
 
-mediator.on('server.configProduction', function() {
+mediator.on('server.config.production', function() {
     mediator.emit('debug', 'http server configured for production');
 });
