@@ -20,14 +20,14 @@ mediator.once('csio.created', function(csio) {
     
     /* development */
     csio.configure('development', function() {
-        mediator.emit('csio.configDevelopment');
+        mediator.emit('csio.config.development');
         
         csio.set('log level', 2);
     });
     
     /* production */
     csio.configure('production', function() {
-        mediator.emit('csio.configProduction');
+        mediator.emit('csio.config.production');
         
         csio.enable('browser client minification');  // send minified client
         csio.enable('browser client etag');          // apply etag caching logic based on version number

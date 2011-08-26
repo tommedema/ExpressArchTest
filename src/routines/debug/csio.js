@@ -8,10 +8,10 @@ mediator.on('csio.configured', function() {
     mediator.emit('debug', 'csio has been configured');
 });
 
-mediator.on('csio.configDevelopment', function() {
+mediator.on('csio.config.development', function() {
     mediator.emit('debug', 'csio configured for development');
 });
 
-mediator.on('csio.configProduction', function() {
+mediator.on('csio.config.production', function() {
     mediator.emit('debug', 'csio configured for production');
 });

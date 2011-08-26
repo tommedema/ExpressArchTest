@@ -1,35 +1,18 @@
 /*
- * Runner: runs server once configured and there have been no halts
+ * Runner: runs server once routes have been setup
  */
 
-var mediator    = require('mediator'),
-    configured  = false,
-    halts       = 0;
+var mediator = require('mediator');
 
-mediator.once('server.configured', function(server) {
-    configured = true;
-    checkRun();
-});
-
-mediator.on('server.haltRun', function() {
-    halts++;
-});
-
-mediator.on('server.continueRun', function() {
-    halts--;
-    checkRun();
-});
-
-function checkRun() {
-    if (configured && halts <= 0) runServer();
-}
-
-function runServer() {
+/* when routers are ready */
+mediator.on('server.routers.ready', function() {
+    
     /* get server */
     mediator.emit('server.request.server', function(server) {
         
         /* get port */
         mediator.emit('settings.getPort', function(port) {
+            
             /* pre-run */
             mediator.emit('server.prerun', server, port);
             
@@ -43,4 +26,4 @@ function runServer() {
             mediator.emit('server.running', server, port);
         });
     });
-}
+});

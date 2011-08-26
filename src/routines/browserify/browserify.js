@@ -2,13 +2,8 @@ var mediator    = require('mediator'),
     bootUtil    = require('../../boot/util'),
     fs          = require('fs');
 
-/* setup browserify as soon as http server is created */
-mediator.once('server.created', function(server) {
-    /* halt route setup since we need to hook first */
-    mediator.emit('server.router.haltSetup');
-    
-    /* halt server run since we first need to install browserify */
-    mediator.emit('server.haltRun');
+/* setup browserify as soon as requested by router */
+mediator.once('browserify.setup', function(server) {
     
     /* set bootstrap data */
     var bootstrapLoc    = __dirname + '/../../client/js/bootstrap.js',
@@ -64,12 +59,6 @@ mediator.once('server.created', function(server) {
                 
                 /* ready */
                 mediator.emit('browserify.ready');
-                
-                /* resume routes hook setup now that we have hooked */
-                mediator.emit('server.router.continueSetup');
-                
-                /* resume server run now that we are ready */
-                mediator.emit('server.continueRun');
             });
         });
     }); 
