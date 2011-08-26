@@ -1,10 +1,10 @@
-var mediator = require('mediator');
+var mediator    = require('mediator');
 
 mediator.once('boot.ready', function() {
     
     process
     .on('uncaughtException', function(exception) {
-        mediator.emit('debug', 'process uncaught exception: ' + exception);
+        mediator.emit('debug', 'process uncaught exception: ' + exception.stack);
     })
     .on('exit', function() {
         mediator.emit('debug', 'process exit');
