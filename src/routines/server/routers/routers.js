@@ -44,7 +44,7 @@ function checkHook() {
     });
     
     /* get server */
-    mediator.emit('server.request.server', function(server) {
+    mediator.emit('server.request', function(server) {
         
         /* install each router ordered by level */
         routers.forEach(function(rObj) {
