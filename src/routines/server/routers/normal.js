@@ -2,27 +2,13 @@
  * Handles router for normal routes
  */
 
-var mediator        = require('mediator'),
-    browserifyRdy   = false,
-    staticRdy       = false;
+var mediator = require('mediator');
 
-mediator.on('server.routers.static.ready', function() {
-    staticRdy = true;
-    check();
+/* register router */
+mediator.on('server.created', function(server) {
+    
+    /* register at highest level (lowest priority) */
+    mediator.emit('server.routers.register', 100, function(cb) {
+        cb(server.router);
+    });
 });
-
-mediator.on('server.routers.browserify.ready', function() {
-    browserifyRdy = true;
-    check();
-});
-
-function check() {
-    if (browserifyRdy && staticRdy) {
-        mediator.emit('server.request.server', function(server) {
-            server.use(server.router);
-            
-            /* routers ready */
-            mediator.emit('server.routers.ready');
-        });
-    }
-}

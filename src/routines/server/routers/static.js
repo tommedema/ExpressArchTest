@@ -5,10 +5,11 @@
 var mediator    = require('mediator'),
     express     = require('express');
 
-/* install static as soon as server is configured */
-mediator.on('server.configured', function(server) {
-    server.use(express.static(__dirname + '/../../client/public'));
+/* register static router as soon as server is created */
+mediator.on('server.created', function(server) {
     
-    /* ready */
-    mediator.emit('server.routers.static.ready');
+    /* register at a low level (high priority) */
+    mediator.emit('server.routers.register', 0, function(cb) {
+        cb(express.static(__dirname + '/../../../client/public'));
+    });
 });

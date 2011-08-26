@@ -1,6 +1,7 @@
 var mediator    = require('mediator'),
     express     = require('express');
 
+/* configure server once it has been created */
 mediator.once('server.created', function(server) {
     
     /* general configuration */
@@ -23,6 +24,13 @@ mediator.once('server.created', function(server) {
         mediator.emit('server.config.production');
     });
     
-    /* done with configuration */
-    mediator.emit('server.configured', server);
+    /* configured when routers are ready */
+    mediator.once('server.routers.ready', function() {
+        
+        /* done with configuration when routers have been setup */
+        mediator.emit('server.configured', server);
+    });
+    
+    /* allow routers to hook now */
+    mediator.emit('server.routers.hook', server);
 });
