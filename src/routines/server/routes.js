@@ -1,5 +1,6 @@
 /**
- * Routes: allows routes to register and installs them to the server
+ * Allows routes to register
+ * Installs routes to the server
  */
 
 var mediator    = require('mediator'),
