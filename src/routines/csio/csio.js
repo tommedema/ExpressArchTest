@@ -13,10 +13,3 @@ mediator.once('server.created', function(server) {
     /* csio created */
     mediator.emit('csio.created', csio);
 });
-
-/* csio is ready once configured */
-mediator.once('csio.configured', function(csio) {
-    
-    /* ready */
-    mediator.emit('csio.ready', csio);
-});
