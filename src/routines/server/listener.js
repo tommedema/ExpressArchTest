@@ -10,12 +10,6 @@ mediator.on('server.configured', function(server) {
     /* get port */
     mediator.emit('settings.request.port', function(port) {
         
-        /* pre-run */
-        mediator.emit('server.prerun', server, port);
-        
-        /* pre-run late */
-        mediator.emit('server.prerunLate', server, port);
-        
         /* listen */
         server.listen(port);
         

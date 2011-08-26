@@ -1,10 +1,15 @@
 var mediator = require('mediator');
 
-mediator.once('server.prerun', function(server, port) {
+mediator.once('boot.ready', function() {
     
-    server.get('/', function(req, res) {
-        res.render('index', {
-            title: 'Frontpage'
-        });
+    /* register route */
+    mediator.emit('server.routes.register', 0, function(server) {
+        
+        /* install route */
+        server.get('/', function(req, res) {
+            res.render('index', {
+                title: 'Frontpage'
+            });
+        }); 
     });
 });

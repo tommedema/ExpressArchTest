@@ -24,11 +24,15 @@ mediator.once('server.created', function(server) {
         mediator.emit('server.config.production');
     });
     
-    /* configured when routers are ready */
+    /* configured when routes and routers are ready */    
     mediator.once('server.routers.ready', function() {
+        /* done with configuration when routes have been setup */
+        mediator.once('server.routes.ready', function() {
+            mediator.emit('server.configured', server);
+        });
         
-        /* done with configuration when routers have been setup */
-        mediator.emit('server.configured', server);
+        /* allow routes to hook now */
+        mediator.emit('server.routes.hook', server);
     });
     
     /* allow routers to hook now */
