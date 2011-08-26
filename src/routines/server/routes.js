@@ -11,7 +11,7 @@ var mediator    = require('mediator'),
  * lower level means higher priority
  * cb is called when route should install itself to server
  */
-mediator.on('server.routes.register', function(level, cb) {    
+mediator.on('server.routes.register', function _registerRoute(level, cb) {    
     routes.push({
         'level':    level
       , 'cb':       cb
@@ -19,14 +19,14 @@ mediator.on('server.routes.register', function(level, cb) {
 });
 
 /* call route callbacks on hook point */
-mediator.once('server.routes.hook', function(server) {    
+mediator.once('server.routes.hook', function _installRoutes(server) {    
     /* sort routes by level */
-    routes.sort(function(a, b){
+    routes.sort(function _sortRoutes(a, b){
         return a.level - b.level;
     });
     
     /* execute callbacks */
-    routes.forEach(function(rObj) {
+    routes.forEach(function _execCb(rObj) {
         rObj.cb(server);
         mediator.emit('server.routes.installed', rObj.cb, rObj.level);
     });

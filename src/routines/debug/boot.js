@@ -1,7 +1,7 @@
 var mediator = require('mediator');
 
-mediator.on('boot.lateboot', function() {
-    mediator.emit('debug', 'lateboot procedure executing');
+mediator.on('boot.init', function() {
+    mediator.emit('debug', 'boot init procedure executing');
 });
 
 mediator.on('boot.ready', function() {

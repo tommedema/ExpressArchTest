@@ -1,9 +1,9 @@
 var mediator = require('mediator');
 
-mediator.once('csio.created', function(csio) {
+mediator.once('csio.created', function _handleConnections(csio) {
     
     /* handle new connections */
-    csio.sockets.on('connection', function(socket) {
+    csio.sockets.on('connection', function _listenEvents(socket) {
         
         /* listen for register */
         socket.on('unregister', onUnregister);
@@ -15,7 +15,7 @@ function onUnregister() {
     var socket = this;
     
     /* client must be registered */
-    socket.get('registered', function(err, registered) {
+    socket.get('registered', function _unregisterClient(err, registered) {
         if (!registered) return mediator.emit('csio.registration.error', 'client is not registered on unregister');
         
         /* unregister */

@@ -3,10 +3,10 @@ var mediator    = require('mediator'),
     fs          = require('fs');
 
 /* setup browserify as soon as server is created */
-mediator.once('server.created', function(server) {
+mediator.once('server.created', function _regRouter(server) {
     
     /* register upcoming router at low level (high priority) */
-    mediator.emit('server.routers.register', 0, function(routerCb) {
+    mediator.emit('server.routers.register', 0, function _setBootstrap(routerCb) {
         
         /* set bootstrap data */
         var bootstrapLoc    = __dirname + '/../../client/js/bootstrap.js',
@@ -16,7 +16,7 @@ mediator.once('server.created', function(server) {
             endDelimiter    = '\n/* routines-end */';
         
         /* read bootstrap file */
-        fs.readFile(bootstrapLoc, 'utf8', function(err, data) {        
+        fs.readFile(bootstrapLoc, 'utf8', function _readBootstrap(err, data) {        
             if (err) return mediator.emit('browserify.error', 'could not open bootstrapLoc: ' + bootstrapLoc);
             
             /* find injection point */
@@ -33,7 +33,7 @@ mediator.once('server.created', function(server) {
             endLoc = data.indexOf(endDelimiter);
             
             /* inject client-side routines to client side bootstrap.js */
-            bootUtil.getRoutines(routinesDir, function(err, routines) {
+            bootUtil.getRoutines(routinesDir, function _injectRoutes(err, routines) {
                 
                 /* inject each route */
                 var offset = 0;
@@ -51,7 +51,7 @@ mediator.once('server.created', function(server) {
                 });
                 
                 /* write file */
-                fs.writeFile(bootstrapLoc, data, 'utf8', function(err) {
+                fs.writeFile(bootstrapLoc, data, 'utf8', function _setRouter(err) {
                     if (err) return mediator.emit('browserify.error', 'could not write to bootstrap file');
                     
                     /* setup browserify now that bootstrap has been prepared */

@@ -17,7 +17,7 @@ mediator.on('boot.error', function(err) {
 });
 
 /* load routines (submodules) */
-bootUtil.loadRoutines(__dirname + '/routines', function(err) {
+bootUtil.loadRoutines(__dirname + '/routines', function _routinesLoaded(err) {
     if (err) return mediator.emit('boot.error', err);
     
     /* boot initialization for routines that need to execute prior to normal routines */

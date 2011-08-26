@@ -11,10 +11,10 @@ var mediator    = require('mediator'),
 /* allow routers to register themselves
  * the lower the level the earlier it will be registered 
  * router can be passed in at any time by calling the callback */ 
-mediator.on('server.routers.register', function(level, cb) {
+mediator.on('server.routers.register', function _registerRouter(level, cb) {
     progress++;
     
-    cb(function(router) {
+    cb(function _onCallback(router) {
         /* add router on callback */
         routers.push({
             'level' : level
@@ -28,7 +28,7 @@ mediator.on('server.routers.register', function(level, cb) {
 });
 
 /* install routers on hook point or wait until ready */
-mediator.once('server.routers.hook', function(server) {
+mediator.once('server.routers.hook', function _setHookRdy(server) {
     hookReady = true;
     checkHook();
 });
@@ -39,15 +39,15 @@ function checkHook() {
     if (progress > 0 || !hookReady) return;
     
     /* sort array by level */
-    routers.sort(function(a, b){
+    routers.sort(function _sortRouters(a, b){
         return a.level - b.level;
     });
     
     /* get server */
-    mediator.emit('server.request', function(server) {
+    mediator.emit('server.request', function _installRouters(server) {
         
         /* install each router ordered by level */
-        routers.forEach(function(rObj) {
+        routers.forEach(function _installRouter(rObj) {
             /* install */
             server.use(rObj.router);
             

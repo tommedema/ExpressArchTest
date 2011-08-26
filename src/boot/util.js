@@ -2,8 +2,8 @@ var fs      = require('fs'),
     after   = require('after');
 
 /* runs the routines in the given directory */
-var loadRoutines = exports.loadRoutines = function(dir, cb) {
-    getRoutines(dir, function(err, routines) {
+var loadRoutines = exports.loadRoutines = function _getRoutines(dir, cb) {
+    getRoutines(dir, function _loadRoutines(err, routines) {
         if (err) cb(err);
         
         routines.forEach(function(routine) {
@@ -16,24 +16,24 @@ var loadRoutines = exports.loadRoutines = function(dir, cb) {
 };
 
 /* detects and returns routines recursively and unordered */
-var getRoutines = exports.getRoutines = function(dir, cb) {    
+var getRoutines = exports.getRoutines = function _readDir(dir, cb) {    
     fs.readdir(dir, function(err, files) {
         if (err) return cb(err);
         
         var results = [];
         
-        var delayed = after(files.length, function() {
+        var delayed = after(files.length, function _done() {
             cb(null, results);
         });
         
-        files.forEach(function(file) {
+        files.forEach(function _handleFile(file) {
             file = dir + '/' + file;
             
-            fs.stat(file, function(err, stats) {
+            fs.stat(file, function _getType(err, stats) {
                 if (err || !stats) return cb('err (' + err + ') or stats of ' + file + ' returns null.');
                 
                 if (stats.isDirectory()) {
-                    getRoutines(file, function(err, res) {
+                    getRoutines(file, function _addResults(err, res) {
                         if (err) return cb(err);
                         
                         results = results.concat(res);

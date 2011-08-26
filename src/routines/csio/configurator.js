@@ -1,9 +1,9 @@
 var mediator = require('mediator');
 
-mediator.once('csio.created', function(csio) {
+mediator.once('csio.created', function _configureCsio(csio) {
     
     /* general configuration */
-    csio.configure(function () {
+    csio.configure(function _setGenConfig() {
         csio.set('transports',
         [
              'websocket'
@@ -19,14 +19,14 @@ mediator.once('csio.created', function(csio) {
     });
     
     /* development */
-    csio.configure('development', function() {
+    csio.configure('development', function _setDevConfig() {
         mediator.emit('csio.config.development');
         
         csio.set('log level', 2);
     });
     
     /* production */
-    csio.configure('production', function() {
+    csio.configure('production', function _setProdConfig() {
         mediator.emit('csio.config.production');
         
         csio.enable('browser client minification');  // send minified client
