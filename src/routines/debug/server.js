@@ -15,12 +15,8 @@ mediator.on('server.created', function(server) {
     });
 });
 
-mediator.on('server.runable', function() {
-    mediator.emit('debug', 'http server is now runable');
-});
-
-mediator.on('server.running', function(server, port) {
-   mediator.emit('debug', 'http server is now running at port: ' + port); 
+mediator.on('server.listening', function(server, port) {
+   mediator.emit('debug', 'http server is now listening at port: ' + port); 
 });
 
 mediator.on('server.configured', function() {

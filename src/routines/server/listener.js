@@ -1,5 +1,5 @@
 /*
- * Runner: runs server once routes have been setup
+ * Listener: makes server listen once configured
  */
 
 var mediator = require('mediator');
@@ -16,10 +16,10 @@ mediator.on('server.configured', function(server) {
         /* pre-run late */
         mediator.emit('server.prerunLate', server, port);
         
-        /* run */
+        /* listen */
         server.listen(port);
         
-        /* running */
-        mediator.emit('server.running', server, port);
+        /* listening */
+        mediator.emit('server.listening', server, port);
     });
 });
