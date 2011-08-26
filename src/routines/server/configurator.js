@@ -8,7 +8,6 @@ mediator.once('server.created', function(server) {
         server.use(express.methodOverride());
         server.use(express.bodyParser());
         server.use(express.static(__dirname + '/../../client/public'));
-        server.use(server.router);
         server.set('views', __dirname + '/../../client/views');
         server.set('view engine', 'jade');
     });

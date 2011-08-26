@@ -1,9 +1,9 @@
 var mediator = require('mediator');
 
-mediator.once('server.running', function(server, port) {
+mediator.once('server.prerunLate', function(server, port) {
     
     /* catch server errors */
-    server.error(function(err, req, res) {
+    server.use(function(err, req, res, next) {
         res.render('500', {
             status : 500
           , title : 'Internal Server Error (500)'

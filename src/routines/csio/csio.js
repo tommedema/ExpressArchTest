@@ -5,6 +5,11 @@
 var mediator = require('mediator'),
     socketio = require('socket.io');
 
+/* halt server running until csio is ready */
+mediator.once('server.created', function() {
+    mediator.emit('server.haltRun');
+});
+
 /* initialize socket.io once server has been configured */
 mediator.once('server.configured', function(server) {
     /* init socket.io */
@@ -14,10 +19,12 @@ mediator.once('server.configured', function(server) {
     mediator.emit('csio.created', csio);
 });
 
-/* server is runable once csio configurated */
-mediator.once('csio.configured', function() {
+/* csio is ready once configured */
+mediator.once('csio.configured', function(csio) {
     
-    mediator.emit('server.getServer', function(server) {
-        mediator.emit('server.runable', server);
-    });
+    /* ready */
+    mediator.emit('csio.ready', csio);
+    
+    /* continue server run */
+    mediator.emit('server.continueRun');
 });

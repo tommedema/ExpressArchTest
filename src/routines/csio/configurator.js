@@ -35,5 +35,5 @@ mediator.once('csio.created', function(csio) {
     });
     
     /* configured */
-    mediator.emit('csio.configured');
+    mediator.emit('csio.configured', csio);
 });

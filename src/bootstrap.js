@@ -8,61 +8,21 @@
 
 /* references */
 var fs          = require('fs'),
-    mediator    = require('mediator');
+    mediator    = require('mediator'),
+    bootUtil    = require('./boot/util');
 
-/* run routines (submodules) */
-runRoutines(__dirname + '/routines', function(err, routines) {
-    if (err) throw err;
-    
-    /* late-boot (for late boot routines once all routines have been loaded, before ready) */
-    mediator.emit('boot.lateboot');
-    
-    /* ready (for normal routines, after late-boot) */
-    mediator.emit('boot.ready');
+/* throw on boot errors */
+mediator.on('boot.error', function(err) {
+    throw err;
 });
 
-/* runs the routines in the given directory */
-function runRoutines(dir, doneCb) {
-    getRoutines(dir, function(err, routines) {
-        if (err) doneCb(err, routines);
-        
-        routines.forEach(function(routine) {
-            var module = require(routine);
-            if (typeof(module) === 'function') module();
-        });
-        
-        doneCb(null, routines);
-    });
-};
-
-/* detects and returns routines recursively and unordered */
-function getRoutines(dir, doneCb) {
-    var results = [];
+/* load routines (submodules) */
+bootUtil.loadRoutines(__dirname + '/routines', function(err) {
+    if (err) return mediator.emit('boot.error', err);
     
-    fs.readdir(dir, function(err, files) {
-        if (err) return doneCb(err);
-        
-        var pending = files.length;
-        files.forEach(function(file) {
-            file = dir + '/' + file;
-            
-            fs.stat(file, function(err, stats) {
-                if (err || !stats) return doneCb('err (' + err + ') or stats of ' + file + ' returns null.');
-                
-                if (stats.isDirectory()) {
-                    getRoutines(file, function(err, res) {
-                        if (err) return doneCb(err);
-                        results = results.concat(res);
-                        pending--;
-                        if (pending === 0) doneCb(null, results);
-                    });
-                }
-                else {
-                    if (file.trim().toLowerCase().substr(file.length - 3, 3) === '.js') results.push(file);
-                    pending--;
-                    if (pending === 0) doneCb(null, results);
-                }
-            });
-        });
-    });
-};
+    /* lateboot (for late boot routines once all routines have been loaded, before ready) */
+    mediator.emit('boot.lateboot');
+    
+    /* ready (for normal routines, after lateboot) */
+    mediator.emit('boot.ready');
+});

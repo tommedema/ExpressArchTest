@@ -1,5 +1,4 @@
-var mediator    = require('mediator'),
-    util        = require('util');
+var mediator    = require('mediator');
 
 mediator.on('server.created', function(server) {
     mediator.emit('debug', 'http server created');

@@ -1,20 +1,22 @@
 {
-    "name": "ExpressArchTest",
-    "description": "Just an example.",
-    "version": "0.0.1-1",
+    "name": "Arch Test",
+    "version": "0.0.2",
     "author": "Tom Medema <tommedema@gmail.com>",
     "contributors": [ 
         { "name": "Tom Medema", "email": "tommedema@gmail.com" }
     ],
     "dependencies": {
-        "express": "2.4.6"
-      , "jade": "0.14.2"
-      , "socket.io": "0.7.9"
-      , "optimist": "0.2.6"
-      , "mediator": "0.0.1"
+        "express"       : "2.4.6"
+      , "jade"          : "0.14.2"
+      , "socket.io"     : "0.7.9"
+      , "mediator"      : "0.0.1"
+      , "settings"      : "0.0.2"
+      , "browserify"    : "1.4.3"
+      , "after"         : "0.1.5"
     },
     "main": "src/main",
     "engines": { 
         "node": ">= 0.4.10 < 0.5.0"
-    }
+    },
+    "private": true
 }
