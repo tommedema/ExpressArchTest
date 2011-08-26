@@ -20,9 +20,9 @@ mediator.on('boot.error', function(err) {
 bootUtil.loadRoutines(__dirname + '/routines', function(err) {
     if (err) return mediator.emit('boot.error', err);
     
-    /* lateboot (for late boot routines once all routines have been loaded, before ready) */
-    mediator.emit('boot.lateboot');
+    /* boot initialization for routines that need to execute prior to normal routines */
+    mediator.emit('boot.init');
     
-    /* ready (for normal routines, after lateboot) */
+    /* ready (for normal routines, after boot.init) */
     mediator.emit('boot.ready');
 });
