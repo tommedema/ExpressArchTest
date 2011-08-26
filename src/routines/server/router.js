@@ -28,7 +28,7 @@ mediator.on('server.configured', function() {
 
 function checkSetup() {
     if (configured && halts <= 0) {
-        mediator.emit('server.getServer', function(server) {
+        mediator.emit('server.request.server', function(server) {
             server.use(server.router);
             
             /* configured */

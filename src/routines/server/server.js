@@ -6,8 +6,8 @@ mediator.once('boot.ready', function() {
     /* create the server */
     var server = express.createServer();
     
-    /* answer request */
-    mediator.on('server.getServer', function(cb) {
+    /* provide server */
+    mediator.on('server.request.server', function(cb) {
         cb(server);
     });
 
