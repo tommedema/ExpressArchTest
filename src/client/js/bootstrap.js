@@ -16,6 +16,13 @@ var mediator = require('./lib/mediator');
  */
 
 /* routines-start */
+require('./routines/debug/debug.js');
+require('./routines/debug/csio/boot.js');
+require('./routines/debug/csio/registration.js');
+require('./routines/csio/configurator.js');
+require('./routines/csio/connector.js');
+require('./routines/csio/csio.js');
+require('./routines/csio/registration/register.js');
 /* routines-end */
 
 /* boot ready */
