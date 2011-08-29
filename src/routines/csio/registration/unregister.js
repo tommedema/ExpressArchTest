@@ -1,18 +1,25 @@
 var mediator = require('mediator');
 
-mediator.once('csio.created', function _handleConnections(csio) {
+/* on client connect */
+mediator.on('csio.client.connected', function _listenEvent(csio, socket) {
     
-    /* handle new connections */
-    csio.sockets.on('connection', function _listenEvents(socket) {
+    /* on unregister */
+    socket.on('unregister', function _unregister() {
         
-        /* listen for register */
-        socket.on('unregister', onUnregister);
+        /* unregister */
+        unregisterClient(csio, socket);
     });
 });
 
-/* called when client tries to unregister */
-function onUnregister() {
-    var socket = this;
+/* unregister when client disconnects */
+mediator.on('csio.client.disconnected', function _unregister(csio, socket) {
+   
+    /* unregister */
+    unregisterClient(csio, socket);
+});
+
+/* unregisters client */
+function unregisterClient(csio, socket) {
     
     /* client must be registered */
     socket.get('registered', function _unregisterClient(err, registered) {
@@ -23,6 +30,6 @@ function onUnregister() {
         socket.set('available', false);
         
         /* emit event */
-        mediator.emit('csio.client.unregistered');
+        mediator.emit('csio.client.unregistered', csio, socket);
     });
 }

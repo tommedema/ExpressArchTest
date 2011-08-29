@@ -8,7 +8,7 @@
     "dependencies": {
         "express"       : "2.4.6"
       , "jade"          : "0.14.2"
-      , "socket.io"     : "0.7.9"
+      , "socket.io"     : "0.7.11"
       , "mediator"      : "0.0.1"
       , "settings"      : "0.0.2"
       , "browserify"    : "1.4.3"
